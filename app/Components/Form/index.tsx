@@ -25,7 +25,7 @@ const Form = () => {
       <p className="mt-10 text-center text-sm text-gray-500">
         Are you new here?
         <Link
-          href={"#"}
+          href={"/Register"}
           className="font-semibold ml-2 leading-6 text-indigo-600 hover:text-indigo-500"
         >
           Register now
