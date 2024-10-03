@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import React, { FormEvent } from "react";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
-import VideoContainer from "../Components/VideoContainer";
+import VideoContainer from "../Components/VideoBackground";
 
 const Register: NextPage<FormEvent> = () => {
   return (
@@ -23,4 +23,6 @@ const Register: NextPage<FormEvent> = () => {
   );
 };
 
+
 export default Register;
+

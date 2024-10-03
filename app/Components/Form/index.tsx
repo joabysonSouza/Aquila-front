@@ -10,10 +10,10 @@ const Form = () => {
         <Input label="Email" type="email" />
         <Input label="Password" type="password" />
 
-        <div className="text-sm">
+        <div className="text-sm text-center">
           <a
             href="#"
-            className="font-semibold ml-2 text-indigo-600 hover:text-indigo-500"
+            className="font-semibold ml-2 text-indigo-400 hover:text-indigo-500"
           >
             Forgot password?
           </a>
@@ -22,11 +22,11 @@ const Form = () => {
         <Button name=" Sign in" type="submit" />
       </form>
 
-      <p className="mt-10 text-center text-sm text-gray-500">
+      <p className="mt-10 text-center text-sm text-white">
         Are you new here?
         <Link
           href={"/Register"}
-          className="font-semibold ml-2 leading-6 text-indigo-600 hover:text-indigo-500"
+          className="font-semibold ml-2 leading-6 text-indigo-500 "
         >
           Register now
         </Link>

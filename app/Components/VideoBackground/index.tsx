@@ -9,6 +9,7 @@ const VideoContainer = ({ children }: { children: ReactNode }) => {
           autoPlay
           loop
           muted
+          preload="auto"
         >
           <source src="/videos/background.mp4" type="video/mp4" />
           Seu navegador não suporta o elemento e vídeo.
