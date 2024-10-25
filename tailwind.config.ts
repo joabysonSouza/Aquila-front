@@ -12,6 +12,12 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      boxShadow: {
+        '3xl': '0px 4px 6px rgba(0, 0, 0, 0.1)',
+      },
+      zIndex:{
+        '999':'999'
+      }
     },
   },
   plugins: [ require('@tailwindcss/forms')],
