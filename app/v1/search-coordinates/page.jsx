@@ -1,21 +1,18 @@
 "use client";
-import { useState } from "react";
-import CoordinateForm from "../../Components/CoordinateForm";
+import { useContext } from "react";
+import {SearchCoordinatesContext } from "../../context/SearchCoordinatesContext";
 import MapComponent from "../../Components/MapComponent";
 
-const searchCoordinates = () => {
-  const [coordinatesList, setCoordinatesList] = useState([[51.505, -0.09]]); // Posição padrão
-
-  const handleCoordinatesSubmit = (coords) => {
-    setCoordinatesList((prevList)=> [...prevList, coords]);
-  };
+const SearchCoordinates = () => {
+ 
+const {coordinatesList} = useContext(SearchCoordinatesContext)
 
   return (
     <div>
-      <h1>Digite Coordenadas</h1>
-       <CoordinateForm onSubmit={handleCoordinatesSubmit} /> 
-      <MapComponent coordinates={coordinatesList} />
+      <MapComponent coordinates={coordinatesList} /> 
+ 
+     
     </div>
   );
 };
-export default searchCoordinates;
+export  default SearchCoordinates 
