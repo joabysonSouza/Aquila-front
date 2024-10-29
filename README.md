@@ -36,4 +36,31 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 
-npm install -D tailwindcss-animated
+
+Latitude: -22.9519
+Longitude: -43.2105
+
+Torre Eiffel (Paris, França):
+
+Latitude: 48.8584
+Longitude: 2.2945
+Estátua da Liberdade (Nova York, EUA):
+
+Latitude: 40.6892
+Longitude: -74.0445
+Coliseu (Roma, Itália):
+
+Latitude: 41.8902
+Longitude: 12.4922
+Grande Muralha da China (Próximo a Pequim, China):
+
+Latitude: 40.4319
+Longitude: 116.5704
+Santuário de Machu Picchu (Peru):
+
+Latitude: -13.1631
+Longitude: -72.5450
+Sydney Opera House (Sydney, Austrália):
+
+Latitude: -33.8568
+Longitude: 151.2153
