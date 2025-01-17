@@ -18,3 +18,5 @@ EXPOSE 3000
 
 # Comando para rodar a aplicação em modo de desenvolvimento
 CMD ["npm", "run", "dev"]
+
+
