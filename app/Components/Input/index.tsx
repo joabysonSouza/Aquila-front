@@ -1,16 +1,18 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 interface inputProps {
   label: string;
   type: string;
+  value: string | number;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Input({ label, type }: inputProps) {
+export default function Input({ label, type, value }: inputProps) {
   return (
-    <div className="mx-5">
+    <div className="mx-3">
       <label
         htmlFor="email"
-        className="font-semibold  text-indigo-400 hover:text-indigo-500"
+        className="font-semibold text-xl text-center  text-indigo-400 hover:text-indigo-500"
       >
         {label}
       </label>
@@ -18,6 +20,7 @@ export default function Input({ label, type }: inputProps) {
         <input
           type={type}
           required
+          value={value}
           className="block w-full rounded-md border-0 bg-slate-300 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
          step="any" />
       </div>
