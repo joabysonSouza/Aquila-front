@@ -1,5 +1,8 @@
 "use client"
+import React from "react";
 import { useState } from "react";
+import Input from "../Input";
+import Button from "../Button";
 
 type SearchFormCoordinatesProps = {
   onAddMarker: (coordinates: [number, number]) => void;
@@ -15,17 +18,26 @@ const SearchFormCoordinates: React.FC<SearchFormCoordinatesProps> = ({ onAddMark
     const lng = parseFloat(longitude);
 
     if (!isNaN(lat) && !isNaN(lng)) {
-      onAddMarker([lat, lng]); // Chama a função passada pelo MapComponent
+      onAddMarker([lat, lng]); 
+      setLatitude("")
+      setLongitude("")
+    }else{
+      alert("Preencha corretamente a latitude e a longitude ")
     }
   };
 
 
   //TODO FALTA CONCERTA O ESTILO DO SEARCH-COORDINATES 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={latitude} onChange={(e) => setLatitude(e.target.value)} placeholder="Latitude" />
-      <input type="text" value={longitude} onChange={(e) => setLongitude(e.target.value)} placeholder="Longitude" />
-      <button type="submit">Adicionar Marcador</button>
+    <form className=" w-96 absolute top-20 left-5 z-[1000] bg-white p-2 rounded-md shadow-md">
+      <label className=" w-full flex text-xl  text-indigo-600 justify-center">Adicionar marcador </label>
+      <Input type="number" value={latitude} onChange={(e) => setLatitude(e.target.value)} placeholder="Latitude"   />
+      <Input type="number" value={longitude} onChange={(e) =>  setLongitude(e.target.value)} placeholder="Longitude" />
+      <div className="pt-3 mx-10">
+      <Button type="submit" name="Buscar" onClick={handleSubmit}/>
+
+      </div>
+
     </form>
   );
 };
