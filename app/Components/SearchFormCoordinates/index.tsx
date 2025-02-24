@@ -27,7 +27,6 @@ const SearchFormCoordinates: React.FC<SearchFormCoordinatesProps> = ({ onAddMark
   };
 
 
-  //TODO FALTA CONCERTA O ESTILO DO SEARCH-COORDINATES 
   return (
     <form className=" w-96 absolute top-20 left-5 z-[1000] bg-white p-2 rounded-md shadow-md">
       <label className=" w-full flex text-xl  text-indigo-600 justify-center">Adicionar marcador </label>

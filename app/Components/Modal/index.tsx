@@ -4,6 +4,7 @@ import { ReactNode, useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import { v4 as uuidv4 } from "uuid";
+import React from "react";
 
 //TODO Evitando que ao clicar no mapa quando o modal estiver aberto não gere um ponto no mapa
 
