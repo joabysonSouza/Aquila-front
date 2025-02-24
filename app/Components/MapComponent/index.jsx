@@ -6,13 +6,13 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  useMap
-
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import SearchFormCoordinates from "../SearchFormCoordinates";
 import Modal from "../Modal";
+import { FaLariSign } from "react-icons/fa6";
 
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
@@ -23,34 +23,26 @@ L.Icon.Default.mergeOptions({
 
 const MapComponent = ({ coordinates }) => {
   const coordinatesStart = [51.505, -0.09];
-  const viewZoom = 3
+  const viewZoom = 3;
   const center = coordinates.length > 0 ? coordinates[0] : coordinatesStart;
 
   const [markers, setMarkers] = useState(coordinates || []);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const mapRef = useRef(null); 
- 
-
-  // useEffect(() => {
-  //   return console.log(mapRef.current)
-  // }, [mapRef.current]);
+  const mapRef = useRef(null);
 
   const handleAddMarker = (newMarker) => {
-    
-   
     setMarkers((prevMarkers) => {
       const updatedMarkers = [...prevMarkers, newMarker];
-      if( mapRef.current){
-        mapRef.current.setView(newMarker, viewZoom)
+      if (mapRef.current) {
+        mapRef.current.setView(newMarker, viewZoom);
       }
- 
+
       return updatedMarkers;
     });
   };
 
-  // Mudança: Simplificação do componente MapEvents, removendo a necessidade de mapRef como prop
   const MapEvents = () => {
-    const map = useMap()
+    const map = useMap();
     useMapEvents({
       click: (e) => {
         if (modalIsOpen) {
@@ -58,11 +50,10 @@ const MapComponent = ({ coordinates }) => {
         }
         const newMarker = [e.latlng.lat, e.latlng.lng];
         setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
-        // map.setView(newMarker, viewZoom)
-       
+        map.setView(newMarker, viewZoom);
       },
     });
-    mapRef.current = map 
+    mapRef.current = map;
     return null;
   };
 
@@ -93,20 +84,23 @@ const MapComponent = ({ coordinates }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        
-        <MapEvents /> 
+
+        <MapEvents />
+        {/*TODO TENTANDO IMPLEMENTAR A LÓGICA DO MODAL */}
 
         {markers.map((coords, i) => (
           <Marker
             position={coords}
             key={i}
-         eventHandlers={{ click: ()=> {
-           if(!modalIsOpen){
-            setModalIsOpen(false)
-            console.log("Modal" , modalIsOpen);
-           }
-         }
-           }}     //setModalIsOpen(!modalIsOpen)
+            eventHandlers={{
+              click: () => {
+                if (modalIsOpen) {
+                  setModalIsOpen(!modalIsOpen);
+                } else {
+                  setModalIsOpen(false);
+                }
+              },
+            }}
           >
             <Popup className="w-80">
               <Modal showCoordinates={coords}>
