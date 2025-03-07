@@ -11,10 +11,9 @@ import React from "react";
 type ModalTypes = {
   showCoordinates?: [number, number];
   children?: ReactNode;
-  
 };
 
-const Modal = ({ showCoordinates, children}: ModalTypes) => {
+const Modal = ({ showCoordinates, children }: ModalTypes) => {
   const [data, setdata] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
 
@@ -65,13 +64,13 @@ const Modal = ({ showCoordinates, children}: ModalTypes) => {
     >
       <Input
         type="text"
-        label="Nomear Sensor"
+        label="Name sensor"
         value={data}
         onChange={handleInputChange}
       />
       <div className="">{children}</div>
 
-      <Button type="submit" name="Salvar" onClick={handleSave} />
+      <Button type="submit" name="Save" onClick={handleSave} />
     </div>
   );
 };

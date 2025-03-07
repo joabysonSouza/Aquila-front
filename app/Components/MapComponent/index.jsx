@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import SearchFormCoordinates from "../SearchFormCoordinates";
 import Modal from "../Modal";
-import { FaLariSign } from "react-icons/fa6";
+import { RiMenu3Fill } from "react-icons/ri";
 
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
@@ -58,21 +58,18 @@ const MapComponent = ({ coordinates }) => {
   };
 
   return (
-    <div style={{ position: "relative", height: "800px", width: "100%" }}>
-      <div
-        style={{
-          position: "absolute",
-          top: "20px",
-          left: "20px",
-          zIndex: 1000,
-          background: "white",
-          padding: "10px",
-          borderRadius: "5px",
-          boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
-        }}
-      >
+    <div  class="relative h-[800px] w-full">
+      <div class="absolute top-5 left-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
         <SearchFormCoordinates onAddMarker={handleAddMarker} />
       </div>
+
+      <div
+        class="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg"
+      >
+        <RiMenu3Fill size={30} color="blue"/>
+
+      </div>
+
 
       <MapContainer
         center={center}
@@ -86,7 +83,7 @@ const MapComponent = ({ coordinates }) => {
         />
 
         <MapEvents />
-        {/*TODO TENTANDO IMPLEMENTAR A LÓGICA DO MODAL */}
+      
 
         {markers.map((coords, i) => (
           <Marker

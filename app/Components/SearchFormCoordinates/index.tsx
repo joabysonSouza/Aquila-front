@@ -28,12 +28,12 @@ const SearchFormCoordinates: React.FC<SearchFormCoordinatesProps> = ({ onAddMark
 
 
   return (
-    <form className=" w-96 absolute top-20 left-5 z-[1000] bg-white p-2 rounded-md shadow-md">
-      <label className=" w-full flex text-xl  text-indigo-600 justify-center">Adicionar marcador </label>
+    <form className=" w-96 absolute top-20 left-5 z-[1000] bg-white p-2 rounded-xl shadow-md">
+      <label className=" w-full flex text-xl  text-indigo-600 justify-center"> add sensor </label>
       <Input type="number" value={latitude} onChange={(e) => setLatitude(e.target.value)} placeholder="Latitude"   />
       <Input type="number" value={longitude} onChange={(e) =>  setLongitude(e.target.value)} placeholder="Longitude" />
       <div className="pt-3 mx-10">
-      <Button type="submit" name="Buscar" onClick={handleSubmit}/>
+      <Button type="submit" name="Search" onClick={handleSubmit}/>
 
       </div>
 
