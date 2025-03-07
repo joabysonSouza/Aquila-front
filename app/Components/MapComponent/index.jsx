@@ -25,7 +25,6 @@ const MapComponent = ({ coordinates }) => {
   const coordinatesStart = [51.505, -0.09];
   const viewZoom = 3;
   const center = coordinates.length > 0 ? coordinates[0] : coordinatesStart;
-
   const [markers, setMarkers] = useState(coordinates || []);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const mapRef = useRef(null);
@@ -36,21 +35,26 @@ const MapComponent = ({ coordinates }) => {
       if (mapRef.current) {
         mapRef.current.setView(newMarker, viewZoom);
       }
-
       return updatedMarkers;
     });
   };
+
+  const handleMarkerClick = () => {
+    setModalIsOpen((prev) => !prev);
+  };
+
+  
 
   const MapEvents = () => {
     const map = useMap();
     useMapEvents({
       click: (e) => {
         if (modalIsOpen) {
-          return console.log("Modal está aberto. Nenhum marcador será criado.");
+          setModalIsOpen(false);
+        } else {
+          const newMarker = [e.latlng.lat, e.latlng.lng];
+          handleAddMarker(newMarker);
         }
-        const newMarker = [e.latlng.lat, e.latlng.lng];
-        setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
-        map.setView(newMarker, viewZoom);
       },
     });
     mapRef.current = map;
@@ -58,18 +62,14 @@ const MapComponent = ({ coordinates }) => {
   };
 
   return (
-    <div  class="relative h-[800px] w-full">
-      <div class="absolute top-5 left-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
+    <div className="relative h-[800px] w-full">
+      <div className="absolute top-5 left-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
         <SearchFormCoordinates onAddMarker={handleAddMarker} />
       </div>
 
-      <div
-        class="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg"
-      >
-        <RiMenu3Fill size={30} color="blue"/>
-
+      <div className="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
+        <RiMenu3Fill size={30} color="blue" />
       </div>
-
 
       <MapContainer
         center={center}
@@ -83,20 +83,13 @@ const MapComponent = ({ coordinates }) => {
         />
 
         <MapEvents />
-      
 
         {markers.map((coords, i) => (
           <Marker
             position={coords}
             key={i}
             eventHandlers={{
-              click: () => {
-                if (modalIsOpen) {
-                  setModalIsOpen(!modalIsOpen);
-                } else {
-                  setModalIsOpen(false);
-                }
-              },
+              click: handleMarkerClick,
             }}
           >
             <Popup className="w-80">
