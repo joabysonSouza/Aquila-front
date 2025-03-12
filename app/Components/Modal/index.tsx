@@ -14,11 +14,11 @@ type ModalTypes = {
 };
 
 const Modal = ({ showCoordinates, children }: ModalTypes) => {
-  const [data, setdata] = useState("");
+  const [data, setData] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setdata(event?.target?.value);
+    setData(event?.target?.value);
   };
 
   let payLoad = {
@@ -37,7 +37,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3005/sensors", {
+      const response = await fetch("http://localhost:3005/sensors",{
         method: "POST",
         headers: {
           "content-Type": "application/json",
@@ -47,9 +47,11 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
 
       if (response.ok) {
         alert("Dados enviados com sucesso");
-        setdata("");
+        setData("");
       } else {
-        alert("erro ao enviar os dados aqui");
+        console.log(data);
+        
+        
       }
     } catch (erro: any) {
       alert("erro no servidor ");
