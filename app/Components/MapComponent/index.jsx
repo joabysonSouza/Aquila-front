@@ -13,6 +13,8 @@ import L from "leaflet";
 import SearchFormCoordinates from "../SearchFormCoordinates";
 import Modal from "../Modal";
 import { RiMenu3Fill } from "react-icons/ri";
+import Link from "next/link"
+import SideBar from "../SideBar";
 
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
@@ -68,7 +70,9 @@ const MapComponent = ({ coordinates }) => {
       </div>
 
       <div className="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
-        <RiMenu3Fill size={30} color="blue" />
+        
+        <SideBar/>
+     
       </div>
 
       <MapContainer
