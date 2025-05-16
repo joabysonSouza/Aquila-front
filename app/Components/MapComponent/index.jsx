@@ -15,6 +15,10 @@ import Modal from "../Modal";
 import { RiMenu3Fill } from "react-icons/ri";
 import Link from "next/link"
 import SideBar from "../SideBar";
+import { usePathname } from "next/navigation";
+import NameSensor from "../NameSensor";
+
+// TODO exibir o modal ou o NameSensor dependendo da rota usando o hook de rotas do next
 
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,6 +34,8 @@ const MapComponent = ({ coordinates }) => {
   const [markers, setMarkers] = useState(coordinates || []);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const mapRef = useRef(null);
+
+  const pathname = usePathname()
 
   const handleAddMarker = (newMarker) => {
     setMarkers((prevMarkers) => {
@@ -96,11 +102,25 @@ const MapComponent = ({ coordinates }) => {
               click: handleMarkerClick,
             }}
           >
-            <Popup className="w-80">
-              <Modal showCoordinates={coords}>
+
+{/* <Modal showCoordinates={coords}>
                 <p>Latitude: {coords[0].toFixed(3)}</p>
                 <p>Longitude: {coords[1].toFixed(3)}</p>
-              </Modal>
+              </Modal> */}
+            <Popup className="w-80">
+           {
+            pathname === '/v1/search-coordinates' ? (
+               <Modal showCoordinates={coords}>
+                <p>Latitude: {coords[0].toFixed(3)}</p>
+                <p>Longitude: {coords[1].toFixed(3)}</p>
+              </Modal> 
+            ):(
+
+              <NameSensor/> 
+
+            )
+             
+           }
             </Popup>
           </Marker>
         ))}

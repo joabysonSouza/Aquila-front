@@ -5,6 +5,8 @@ import Button from "../Button";
 import Input from "../Input";
 import { v4 as uuidv4 } from "uuid";
 import React from "react";
+import { usePathname } from "next/navigation";
+
 
 //TODO Evitando que ao clicar no mapa quando o modal estiver aberto não gere um ponto no mapa
 
@@ -14,12 +16,15 @@ type ModalTypes = {
 };
 
 const Modal = ({ showCoordinates, children }: ModalTypes) => {
+ 
   const [data, setData] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setData(event?.target?.value);
   };
+
+  
 
   let payLoad = {
     sensor_name: data,
