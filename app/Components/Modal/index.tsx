@@ -16,6 +16,7 @@ type ModalTypes = {
 };
 
 const Modal = ({ showCoordinates, children }: ModalTypes) => {
+  const [lat, lng] = showCoordinates ?? [0,0]
  
   const [data, setData] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
@@ -31,7 +32,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     user_id: uuidv4(),
     location: {
       type: "Point",
-      coordinates: selectedCoords,
+      coordinates: [lng,lat]
     },
   };
 
