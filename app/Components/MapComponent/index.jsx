@@ -13,7 +13,7 @@ import L from "leaflet";
 import SearchFormCoordinates from "../SearchFormCoordinates";
 import Modal from "../Modal";
 import { RiMenu3Fill } from "react-icons/ri";
-import Link from "next/link"
+import Link from "next/link";
 import SideBar from "../SideBar";
 import { usePathname } from "next/navigation";
 import NameSensor from "../NameSensor";
@@ -35,7 +35,13 @@ const MapComponent = ({ coordinates }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const mapRef = useRef(null);
 
-  const pathname = usePathname()
+  const pathname = usePathname();
+
+    useEffect(() => {
+    if (coordinates && coordinates.length > 0) {
+      setMarkers(coordinates);
+    }
+  }, [coordinates]);
 
   const handleAddMarker = (newMarker) => {
     setMarkers((prevMarkers) => {
@@ -50,8 +56,6 @@ const MapComponent = ({ coordinates }) => {
   const handleMarkerClick = () => {
     setModalIsOpen((prev) => !prev);
   };
-
-  
 
   const MapEvents = () => {
     const map = useMap();
@@ -76,9 +80,7 @@ const MapComponent = ({ coordinates }) => {
       </div>
 
       <div className="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
-        
-        <SideBar/>
-     
+        <SideBar />
       </div>
 
       <MapContainer
@@ -102,25 +104,9 @@ const MapComponent = ({ coordinates }) => {
               click: handleMarkerClick,
             }}
           >
-
-{/* <Modal showCoordinates={coords}>
-                <p>Latitude: {coords[0].toFixed(3)}</p>
-                <p>Longitude: {coords[1].toFixed(3)}</p>
-              </Modal> */}
             <Popup className="w-80">
-           {
-            pathname === '/v1/search-coordinates' ? (
-               <Modal showCoordinates={coords}>
-                <p>Latitude: {coords[0].toFixed(3)}</p>
-                <p>Longitude: {coords[1].toFixed(3)}</p>
-              </Modal> 
-            ):(
-
-              <NameSensor/> 
-
-            )
-             
-           }
+              {pathname === "/v1/search-coordinates" ? <Modal showCoordinates={coords} /> : <NameSensor/> }
+          
             </Popup>
           </Marker>
         ))}
