@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 import React from "react";
 import { usePathname } from "next/navigation";
 
-
 //TODO Evitando que ao clicar no mapa quando o modal estiver aberto não gere um ponto no mapa
 
 type ModalTypes = {
@@ -16,8 +15,11 @@ type ModalTypes = {
 };
 
 const Modal = ({ showCoordinates, children }: ModalTypes) => {
-  const [lat, lng] = showCoordinates ?? [0,0]
- 
+  const [lat, lng] = showCoordinates ?? [0, 0];
+
+  const fixedLat = Number(lat.toFixed(2));
+   const fixedLng = Number(lng.toFixed(2));
+
   const [data, setData] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
 
@@ -25,14 +27,12 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     setData(event?.target?.value);
   };
 
-  
-
   let payLoad = {
     sensor_name: data,
     user_id: uuidv4(),
     location: {
       type: "Point",
-      coordinates: [lng,lat]
+      coordinates: [fixedLng,fixedLat],
     },
   };
 
@@ -43,7 +43,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3005/sensors",{
+      const response = await fetch("http://localhost:3005/sensors", {
         method: "POST",
         headers: {
           "content-Type": "application/json",
@@ -56,8 +56,6 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
         setData("");
       } else {
         console.log(data);
-        
-        
       }
     } catch (erro: any) {
       alert("erro no servidor ");
@@ -76,7 +74,10 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
         value={data}
         onChange={handleInputChange}
       />
-      <div className="">{children}</div>
+      <div>
+        <p>Latidude: {fixedLat}</p>
+        <p> Longitude: {fixedLng}</p>
+      </div>
 
       <Button type="submit" name="Save" onClick={handleSave} />
     </div>
