@@ -74,6 +74,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
         value={data}
         onChange={handleInputChange}
       />
+      
       <div>
         <p>Latidude: {fixedLat}</p>
         <p> Longitude: {fixedLng}</p>
