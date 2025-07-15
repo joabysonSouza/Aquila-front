@@ -43,7 +43,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3005/sensors", {
+      const response = await fetch("https://new-aquila-back.onrender.com/sensors", {
         method: "POST",
         headers: {
           "content-Type": "application/json",

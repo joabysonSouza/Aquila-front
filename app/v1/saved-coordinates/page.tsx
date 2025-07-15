@@ -12,7 +12,7 @@ const savedCoordinates = () => {
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const response = await fetch("http://localhost:3005/sensors");
+        const response = await fetch("https://new-aquila-back.onrender.com/sensors");
         const data = await response.json();
 
         const coords = data.map((sensor:any) => {
