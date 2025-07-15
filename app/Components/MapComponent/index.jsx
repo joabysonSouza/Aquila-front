@@ -75,19 +75,19 @@ const MapComponent = ({ coordinates }) => {
 
   return (
     <div className="relative h-[800px] w-full">
-      <div className="absolute top-5 left-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
-        <SearchFormCoordinates onAddMarker={handleAddMarker} />
+      <div className="absolute top-5 left-5 z-999 p-2.5 rounded-md shadow-lg">
+        <SearchFormCoordinates onAddMarker={handleAddMarker} /> 
+         <SideBar />
       </div>
 
-      <div className="absolute top-5 right-5 z-999 bg-white p-2.5 rounded-md shadow-lg">
-        <SideBar />
-      </div>
-
+      
+       
       <MapContainer
         center={center}
         zoom={3}
         style={{ height: "800px", width: "100%" }}
         closePopupOnClick={!modalIsOpen}
+        zoomControl={false}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -105,7 +105,9 @@ const MapComponent = ({ coordinates }) => {
             }}
           >
             <Popup className="w-80">
-              {pathname === "/v1/search-coordinates" ? <Modal showCoordinates={coords} /> : <NameSensor/> }
+              {pathname === "/v1/search-coordinates" 
+              ? <Modal showCoordinates={coords} /> 
+              : <NameSensor markerCoords={coords}/> }
           
             </Popup>
           </Marker>
