@@ -6,7 +6,7 @@ const NameSensor = ({ markerCoords}: {markerCoords:any}) => {
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const response = await fetch('https://new-aquila-back.onrender.com/sensors');
+        const response = await fetch('http://localhost:3005/sensors');
         const data = await response.json();
 
         const foundSensor = data.find((sensor: any) => {
