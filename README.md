@@ -42,7 +42,7 @@ O **App Aquila** é uma aplicação baseada em **Next.js**, que permite salvar e
 
 3. **Acesse a aplicação** no navegador:
    ```
-   http://localhost:3000
+ http://localhost:3005/sensors
    ```
 
 ---
@@ -70,7 +70,7 @@ O **App Aquila** é uma aplicação baseada em **Next.js**, que permite salvar e
 
 2. **Acesse a aplicação** no navegador:
    ```
-   http://localhost:3000
+    http://localhost:3005/sensors
    ```
 
 Para parar os containers, use:
