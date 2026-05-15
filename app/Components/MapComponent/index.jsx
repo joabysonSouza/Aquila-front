@@ -12,13 +12,11 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import SearchFormCoordinates from "../SearchFormCoordinates";
 import Modal from "../Modal";
-import { RiMenu3Fill } from "react-icons/ri";
-import Link from "next/link";
 import SideBar from "../SideBar";
 import { usePathname } from "next/navigation";
 import NameSensor from "../NameSensor";
 
-// TODO exibir o modal ou o NameSensor dependendo da rota usando o hook de rotas do next
+
 
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
