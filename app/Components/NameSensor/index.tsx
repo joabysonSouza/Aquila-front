@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react';
 
-const NameSensor = ({ markerCoords}: {markerCoords:any}) => {
+const NameSensor = ({ markerCoords }: { markerCoords: any }) => {
   const [sensorName, setSensorName] = useState('');
 
   useEffect(() => {
-    const fetchCoordinates = async () => {
-      try {
-        const response = await fetch('http://localhost:3005/sensors');
-        const data = await response.json();
+    try {
+      // Pega os sensores do localStorage
+      const storedData = localStorage.getItem("sensors");
+      const sensors = storedData ? JSON.parse(storedData) : [];
 
-        const foundSensor = data.find((sensor: any) => {
-          const [lng, lat] = sensor.location.coordinates;
-          return (
-            lng === markerCoords[1] && lat === markerCoords[0]
-          );
-        });
+      // Procura o sensor pelas coordenadas
+      const foundSensor = sensors.find((sensor: any) => {
+        const [lng, lat] = sensor.location.coordinates;
 
-        if (foundSensor) {
-          setSensorName(foundSensor.sensor_name);
-        } else {
-          setSensorName('Nome não encontrado');
-        }
-      } catch (error) {
-        console.error('Erro ao buscar sensores:', error);
-        setSensorName('Erro ao buscar nome');
+        return (
+          lng === markerCoords[1] &&
+          lat === markerCoords[0]
+        );
+      });
+
+      if (foundSensor) {
+        setSensorName(foundSensor.sensor_name);
+      } else {
+        setSensorName('Sensor não nomeado');
       }
-    };
 
-    fetchCoordinates();
+    } catch (error) {
+      console.error('Erro ao buscar sensores:', error);
+      setSensorName('Erro ao buscar nome');
+    }
   }, [markerCoords]);
 
   return (

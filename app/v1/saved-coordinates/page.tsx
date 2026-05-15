@@ -2,37 +2,29 @@
 import MapComponent from "@/app/Components/MapComponent";
 import React, { useEffect, useState } from "react";
 
-
-
-const savedCoordinates = () => {
-  const [coordinates, setCoordinates] = useState([]);
-
-
+const SavedCoordinates = () => {
+  const [coordinates, setCoordinates] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchCoordinates = async () => {
-      try {
-        const response = await fetch("http://localhost:3005/sensors");
-        const data = await response.json();
+    try {
+      // Pega os sensores do localStorage
+      const storedData = localStorage.getItem("sensors");
+      const sensors = storedData ? JSON.parse(storedData) : [];
 
-        const coords = data.map((sensor:any) => {
-          const [lng, lat] = sensor.location.coordinates
-          return [lat,lng]
-        });
-        setCoordinates(coords);
-        console.log("aqui",coords,)
+      // Extrai as coordenadas
+      const coords = sensors.map((sensor: any) => {
+        const [lng, lat] = sensor.location.coordinates;
+        return [lat, lng];
+      });
 
-      } catch (error) {
-        console.error("Erro ao buscar sensores:", error);
-      }
-    };
-    fetchCoordinates();
+      setCoordinates(coords);
+
+    } catch (error) {
+      console.error("Erro ao carregar sensores:", error);
+    }
   }, []);
 
-  return(
-    <MapComponent coordinates={coordinates} />
-
-  ) 
+  return <MapComponent coordinates={coordinates} />;
 };
 
-export default savedCoordinates;
+export default SavedCoordinates;

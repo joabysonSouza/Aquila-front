@@ -5,9 +5,6 @@ import Button from "../Button";
 import Input from "../Input";
 import { v4 as uuidv4 } from "uuid";
 import React from "react";
-import { usePathname } from "next/navigation";
-
-//TODO Evitando que ao clicar no mapa quando o modal estiver aberto não gere um ponto no mapa
 
 type ModalTypes = {
   showCoordinates?: [number, number];
@@ -18,7 +15,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
   const [lat, lng] = showCoordinates ?? [0, 0];
 
   const fixedLat = Number(lat.toFixed(2));
-   const fixedLng = Number(lng.toFixed(2));
+  const fixedLng = Number(lng.toFixed(2));
 
   const [data, setData] = useState("");
   const [selectedCoords, setSelectedCoords] = useState(showCoordinates);
@@ -32,7 +29,7 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     user_id: uuidv4(),
     location: {
       type: "Point",
-      coordinates: [fixedLng,fixedLat],
+      coordinates: [fixedLng, fixedLat],
     },
   };
 
@@ -43,23 +40,21 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3005/sensors", {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(payLoad),
-      });
+      const existingData = localStorage.getItem("sensors");
 
-      if (response.ok) {
-        alert("Dados enviados com sucesso");
-        setData("");
-      } else {
-        console.log(data);
-      }
+      const sensors = existingData ? JSON.parse(existingData) : [];
+      sensors.push(payLoad);
+
+      localStorage.setItem("sensors", JSON.stringify(sensors));
+
+      localStorage.setItem("payLoad", JSON.stringify(payLoad));
+
+      setData("")
+      alert("Dados Salvo com sucesso")
+
     } catch (erro: any) {
       alert("erro no servidor ");
-      console.log("Erro no servidor", erro);
+
     }
   };
 
@@ -74,9 +69,9 @@ const Modal = ({ showCoordinates, children }: ModalTypes) => {
         value={data}
         onChange={handleInputChange}
       />
-      
+
       <div>
-        <p>Latidude: {fixedLat}</p>
+        <p>Latitude: {fixedLat}</p>
         <p> Longitude: {fixedLng}</p>
       </div>
 
