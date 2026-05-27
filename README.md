@@ -7,9 +7,16 @@ O **App Aquila** é uma aplicação baseada em **Next.js**, que permite salvar e
 - **Next.js** (React + TypeScript)
 - **react-leaflet** (para exibir o mapa)
 - **Tailwind CSS** (para estilização)
-- **Docker & Docker Compose** (para containerização)
+- **Docker & Docker Compose** (para conteinerização)
 
 ---
+
+## Imagens 
+
+<img src="./public/images/telaLogin.png" />
+
+<img src="./public/images/aquilaImage.png" />
+
 
 ## 🚀 Como Rodar o Projeto
 
@@ -42,7 +49,7 @@ O **App Aquila** é uma aplicação baseada em **Next.js**, que permite salvar e
 
 3. **Acesse a aplicação** no navegador:
    ```
-   http://localhost:3000
+ http://localhost:3005/sensors
    ```
 
 ---
@@ -58,19 +65,19 @@ O **App Aquila** é uma aplicação baseada em **Next.js**, que permite salvar e
 1. **Clone o repositório**:
 
    ```sh
-   git clonehttps://github.com/joabysonSouza/Aquila-front.git
+   git clone https://github.com/joabysonSouza/Aquila-front.git
    cd app-aquila
    ```
 
-   3. **Suba os containers**:
+   2. **Suba os containers**:
 
    ```sh
    docker-compose up -d
    ```
 
-2. **Acesse a aplicação** no navegador:
+3. **Acesse a aplicação** no navegador:
    ```
-   http://localhost:3000
+    http://localhost:3005/sensors
    ```
 
 Para parar os containers, use:
