@@ -16,8 +16,6 @@ import SideBar from "../SideBar";
 import { usePathname } from "next/navigation";
 import NameSensor from "../NameSensor";
 
-
-
 // Configurar o ícone do marcador
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -35,7 +33,7 @@ const MapComponent = ({ coordinates }) => {
 
   const pathname = usePathname();
 
-    useEffect(() => {
+  useEffect(() => {
     if (coordinates && coordinates.length > 0) {
       setMarkers(coordinates);
     }
@@ -49,6 +47,15 @@ const MapComponent = ({ coordinates }) => {
       }
       return updatedMarkers;
     });
+  };
+
+  const handleDeleteMarker = (markerCoords) => {
+    setMarkers((prevMarkers) =>
+      prevMarkers.filter(
+        (coords) =>
+          !(coords[0] === markerCoords[0] && coords[1] === markerCoords[1]),
+      ),
+    );
   };
 
   const handleMarkerClick = () => {
@@ -74,8 +81,8 @@ const MapComponent = ({ coordinates }) => {
   return (
     <div className="relative h-[800px] w-full">
       <div className="absolute top-5 left-5 z-999 p-2.5 rounded-md shadow-lg">
-        <SearchFormCoordinates onAddMarker={handleAddMarker} /> 
-         <SideBar />
+        <SearchFormCoordinates onAddMarker={handleAddMarker} />
+        <SideBar />
       </div>
 
       
@@ -103,10 +110,14 @@ const MapComponent = ({ coordinates }) => {
             }}
           >
             <Popup className="w-80">
-              {pathname === "/v1/search-coordinates" 
-              ? <Modal showCoordinates={coords} /> 
-              : <NameSensor markerCoords={coords}/> }
-          
+              {pathname === "/v1/search-coordinates" ? (
+                <Modal showCoordinates={coords} />
+              ) : (
+                <NameSensor
+                  markerCoords={coords}
+                  onDeleteMarker={handleDeleteMarker}
+                />
+              )}
             </Popup>
           </Marker>
         ))}

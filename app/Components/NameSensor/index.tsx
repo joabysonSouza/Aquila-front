@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button";
 
-const NameSensor = ({ markerCoords }: { markerCoords: any }) => {
+const NameSensor = ({
+  markerCoords,
+  onDeleteMarker,
+}: {
+  markerCoords: any;
+  onDeleteMarker: (coords: any) => void;
+}) => {
   const [sensorName, setSensorName] = useState("");
 
   useEffect(() => {
@@ -12,10 +18,7 @@ const NameSensor = ({ markerCoords }: { markerCoords: any }) => {
       const foundSensor = sensors.find((sensor: any) => {
         const [lng, lat] = sensor.location.coordinates;
 
-        return (
-          lng === markerCoords[1] &&
-          lat === markerCoords[0]
-        );
+        return lng === markerCoords[1] && lat === markerCoords[0];
       });
 
       if (foundSensor) {
@@ -37,16 +40,12 @@ const NameSensor = ({ markerCoords }: { markerCoords: any }) => {
       const updatedSensors = sensors.filter((sensor: any) => {
         const [lng, lat] = sensor.location.coordinates;
 
-        return !(
-          lng === markerCoords[1] &&
-          lat === markerCoords[0]
-        );
+        return !(lng === markerCoords[1] && lat === markerCoords[0]);
       });
 
-      localStorage.setItem(
-        "sensors",
-        JSON.stringify(updatedSensors)
-      );
+      localStorage.setItem("sensors", JSON.stringify(updatedSensors));
+
+      onDeleteMarker(markerCoords);
 
       setSensorName("Sensor removido");
     } catch (error) {
